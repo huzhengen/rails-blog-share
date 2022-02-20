@@ -19,6 +19,9 @@ class ApplicationController < ActionController::API
     if resource.errors.empty?
       render json: { resource: resource }, status: 200
     else
+      p '-----------------'
+      p resource
+      p '-----------------'
       err = resource.errors.messages[:email][0] || resource.errors.messages[:password][0] || resource.errors.messages[:password_confirmation][0]
       render json: { error: err }, status: 422
     end
