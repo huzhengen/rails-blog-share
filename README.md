@@ -12,3 +12,8 @@ bundle exec rails db:migrate
 ```
 bundle exec rails g mailer UserMailer
 ```
+
+Session Control
+```
+bundle exec rails g controller sessions
+```
