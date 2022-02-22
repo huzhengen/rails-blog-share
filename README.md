@@ -17,3 +17,9 @@ Session Control
 ```
 bundle exec rails g controller sessions
 ```
+
+Blog
+```
+bundle exec rails g model Blog
+bundle exec rails g migration AddUserRefToBlogs user:references
+```
