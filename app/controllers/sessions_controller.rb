@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:current_user_id] = nil
-    head :ok
+    # head :ok
+    render json: { resource: nil, isLogin: false }, status: 200
   end
 
   def create_params

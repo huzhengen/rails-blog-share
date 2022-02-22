@@ -5,7 +5,10 @@ class UsersController < ApplicationController
 
   def me
     # render_resource current_user
-    return head 404 if current_user.nil?
+    if current_user.nil?
+      render json: { resource: nil, isLogin: false }, status: 200
+      return
+    end
     if current_user.errors.empty?
       render json: { resource: current_user, isLogin: true }, status: 200
     else
