@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       return
     end
     if current_user.errors.empty?
-      render json: { resource: current_user, isLogin: true }, status: 200
+      render json: { resource: current_user.as_json(except: [:password_digest]), isLogin: true }, status: 200
     else
       err = current_user.errors.messages[:email][0] || current_user.errors.messages[:password][0] || current_user.errors.messages[:password_confirmation][0]
       render json: { error: err }, status: 422
