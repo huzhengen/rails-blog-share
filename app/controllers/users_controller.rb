@@ -1,6 +1,15 @@
+require 'digest/md5'
+
 class UsersController < ApplicationController
   def create
-    render_resource User.create create_params
+    @user = User.new create_params
+    email_address = params[:email].downcase
+    hash = Digest::MD5.hexdigest(email_address)
+    # image_src = "https://www.gravatar.com/avatar/#{hash}"
+    image_src = "https://sdn.geekzu.org/avatar/#{hash}"
+    @user[:gravatar_url] = image_src
+    @user.save
+    render_resource @user
   end
 
   def me
