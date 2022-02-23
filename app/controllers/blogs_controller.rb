@@ -16,7 +16,11 @@ class BlogsController < ApplicationController
   def index
     blogs = Blog.all
     # render json: { resource: blogs.as_json(include: {}), total: blogs.length, page: 1 }, status: 200
-    render json: { resource: blogs.as_json(include: 'user'), total: blogs.length, page: 1 }, status: 200
+    render json: {
+      resource: blogs.as_json(include: { 'user': { except: [:password_digest] } }),
+      total: blogs.length,
+      page: 1
+    }, status: 200
   end
 
   def show
