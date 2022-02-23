@@ -8,8 +8,12 @@ class UsersController < ApplicationController
     # image_src = "https://www.gravatar.com/avatar/#{hash}"
     image_src = "https://sdn.geekzu.org/avatar/#{hash}"
     @user[:gravatar_url] = image_src
-    @user.save
-    render_resource @user
+    if @user.save
+      render json: { resource: @user.as_json(except: [:password_digest]), msg: '注册成功！' }, status: 200
+    else
+      err = @user.errors.messages[:email][0] || @user.errors.messages[:password][0] || @user.errors.messages[:password_confirmation][0]
+      render json: { error: err }, status: 422
+    end
   end
 
   def me
