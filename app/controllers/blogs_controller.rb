@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :must_sign_in
+  # before_action :must_sign_in
 
   def create
     @blog = Blog.new(create_params)
@@ -32,7 +32,7 @@ class BlogsController < ApplicationController
     render json: {
       resource: blogs.as_json(include: { 'user': { except: [:password_digest] } }),
       total: blogs.length,
-      page: params[:page]
+      page: params[:page].to_i
     }, status: 200
   end
 
