@@ -22,16 +22,19 @@ class BlogsController < ApplicationController
   end
 
   def index
-    blogs = Blog.where(at_index: params[:at_index])
-                .page(params[:page].to_i).order('created_at DESC')
-    unless params[:userId].nil?
+    if params[:userId].nil?
+      all_blogs = Blog.all
+      blogs = Blog.where(at_index: params[:at_index])
+                  .page(params[:page].to_i).per(10).order('created_at DESC')
+    else
+      all_blogs = Blog.where(user_id: params[:userId])
       blogs = Blog.where(user_id: params[:userId])
-                  .page(params[:page].to_i).order('created_at DESC')
+                  .page(params[:page].to_i).per(10).order('created_at DESC')
     end
     # render json: { resource: blogs.as_json(include: {}), total: blogs.length, page: 1 }, status: 200
     render json: {
       resource: blogs.as_json(include: { 'user': { except: [:password_digest] } }),
-      total: blogs.length,
+      total: all_blogs.length,
       page: params[:page].to_i
     }, status: 200
   end
