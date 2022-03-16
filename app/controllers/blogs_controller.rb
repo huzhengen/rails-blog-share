@@ -3,7 +3,7 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(create_params)
-    @blog.user_id = current_user.id
+    # @blog.user_id = current_user.id
     @blog.user = current_user
     if @blog.save
       render json: { resource: @blog, msg: '创建博客成功！' }, status: 200
