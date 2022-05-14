@@ -43,7 +43,12 @@ class BlogsController < ApplicationController
     # @blog = Blog.find(params[:id])
     # user = User.find(@blog.user_id)
     # @blog = @blog.as_json.merge(:user => user)
-    @blog = Blog.includes(:user).where(id: params[:id], user: current_user).first
+    if current_user
+      @blog = Blog.includes(:user).where(id: params[:id], user: current_user).first
+    else
+      blog = Blog.find(params[:id])
+      @blog = Blog.includes(:user).where(id: params[:id], user: blog.user_id).first
+    end
     @blog = @blog.as_json.merge(user: @blog.user)
     render json: { resource: @blog, total: @blog.length }, status: 200
   end

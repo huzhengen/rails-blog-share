@@ -1,3 +1,13 @@
+docker 启动数据库
+
+```bash
+# mac
+docker run -v /home/mysql57/data:/var/lib/mysql57/data --name=mysql -it -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
+
+# windows oh-my-env mysql
+docker run -v mysql57-data:/var/lib/mysql57/data --name db-for-mysql -it -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --network=network1 -d mysql:5.7
+```
+
 初始化项目
 
 ```bash
