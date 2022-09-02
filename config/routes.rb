@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :blogs
+  resources :events
   resources :records
   resources :tags
   resources :taggings, except: [:update]

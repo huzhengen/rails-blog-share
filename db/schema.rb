@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_105446) do
+ActiveRecord::Schema.define(version: 2022_08_17_024339) do
 
   create_table "blogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(version: 2022_02_23_105446) do
     t.bigint "user_id"
     t.index ["title"], name: "index_blogs_on_title"
     t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "status_a"
+    t.string "status_b"
+    t.string "status_c"
+    t.string "status_d"
+    t.string "title"
+    t.string "date"
+    t.string "start_time"
+    t.string "end_time"
+    t.string "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
