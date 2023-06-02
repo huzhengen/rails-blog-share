@@ -1,3 +1,12 @@
+# rails-blog-share
+
+Deploy
+```
+rvm use ruby-2.7.4
+bin/pack_for_remote.sh
+need_migrate=1 bin/pack_for_remote.sh
+```
+
 docker 启动数据库
 
 ```bash
@@ -32,10 +41,4 @@ Blog
 ```
 bundle exec rails g model Blog
 bundle exec rails g migration AddUserRefToBlogs user:references
-```
-
-Deploy
-```
-bin/pack_for_remote.sh
-need_migrate=1 bin/pack_for_remote.sh
 ```
