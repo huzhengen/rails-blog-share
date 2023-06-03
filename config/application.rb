@@ -32,8 +32,28 @@ module RailsShareBlog
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.session_store :cookie_store, key: '_share_blog_session_id'
+    # config.session_store :redis_session_store,
+    #                      key: "_kittens_session",
+    #                      serializer: :json,
+    #                      domain: :all,
+    #                      redis: {
+    #                        expire_after: 1.week,
+    #                        key_prefix: "kittens:session:",
+    #                        url: ENV["REDIS_SESSIONS_URL"],
+    #                      }
+    # config.session_store :cookie_store,
+    #                      key: "great_session",
+    #                      domain: :all
+    config.session_store :cookie_store,
+                         key: "_share_blog_session_id"
+                        #  domain: :all,
+                        #  same_site: :none,
+                        #  secure: :true,
+                        #  tld_length: 3
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
+
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
